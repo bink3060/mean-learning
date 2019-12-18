@@ -7,14 +7,19 @@ const postsRoutes = require("./routes/posts");
 
 const app = express();
 
+const MONGO_USER = 'user';
+const MONGO_PWD = 'Yf4C3AFAhDP8WFsD';
+const MONGO_DATABASE = 'mean-stack';
+const MONGODB_URI = `mongodb+srv://${MONGO_USER}:${MONGO_PWD}@cluster0-l2fui.mongodb.net/${MONGO_DATABASE}`;
+
 mongoose
-  .connect(
-    "mongodb+srv://max:QuBqs0T45GDKPlIG@cluster0-ntrwp.mongodb.net/node-angular?retryWrites=true"
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true  }
   )
   .then(() => {
     console.log("Connected to database!");
   })
-  .catch(() => {
+  .catch((e) => {
+    console.log(e);
     console.log("Connection failed!");
   });
 
